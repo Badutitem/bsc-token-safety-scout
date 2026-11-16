@@ -1,0 +1,113 @@
+{
+  "address": "0x7468aaa418869760b8488b45d59afb624781435b",
+  "chain": 56,
+  "chain_name": "BSC (BNB Smart Chain)",
+  "token": {
+    "name": "Aequitas",
+    "symbol": "AEQ",
+    "decimals": 18,
+    "total_supply": 209999870000.0,
+    "owner": null,
+    "is_contract": true
+  },
+  "verification": {
+    "source": "Sourcify",
+    "status": "exact_match",
+    "verified_at": "2026-11-08T01:06:42Z"
+  },
+  "pools": {
+    "exists": true,
+    "liquidity_usd": 2908.73,
+    "volume_24h_usd": 0.9,
+    "dexscreener": {
+      "pairs_found": 1,
+      "total_liquidity_usd": 2908.73,
+      "total_volume_24h_usd": 0.9,
+      "best_pair": {
+        "pair": "0xE3ffA2cA8d0E27a3fD874Fe51E477858D427B2Be",
+        "dex": "pancakeswap",
+        "liquidity_usd": 2908.73,
+        "volume_24h_usd": 0.9
+      }
+    },
+    "geckoterminal": {
+      "pairs_found": 1,
+      "total_liquidity_usd": 2907.25,
+      "total_volume_24h_usd": 0.9
+    }
+  },
+  "danger_signals": [
+    {
+      "signal": "mint function in source",
+      "severity": "warn",
+      "evidence": "verified source scan"
+    }
+  ],
+  "proxy": {
+    "eip1967_implementation": null,
+    "goplus_is_proxy": false
+  },
+  "goplus": {
+    "is_honeypot": false,
+    "honeypot_unknown": false,
+    "buy_tax": 0.02,
+    "sell_tax": 0.02,
+    "holder_count": "104",
+    "top_holders": [
+      {
+        "address": "0x5447d8281d01193e6db3889edca10b5bccd98dfb",
+        "percent": 0.9780419105198269
+      },
+      {
+        "address": "0xe3ffa2ca8d0e27a3fd874fe51e477858d427b2be",
+        "percent": 0.02100266624944336
+      },
+      {
+        "address": "0x7468aaa418869760b8488b45d59afb624781435b",
+        "percent": 0.000382958159590178
+      },
+      {
+        "address": "0x40ca8334776b6d15c58424147b919c4060110359",
+        "percent": 3.7095261058971e-05
+      },
+      {
+        "address": "0xcfe128219522b3a59d69025295f704e34373a967",
+        "percent": 2.000001238096e-05
+      },
+      {
+        "address": "0xc3fc05232d86a69dbb7db667eb4100e3b9b17189",
+        "percent": 2.000001238096e-05
+      },
+      {
+        "address": "0xa2815bdfcdda88b83640125baf7d42b4a74f39ea",
+        "percent": 2.000001238096e-05
+      },
+      {
+        "address": "0xa172ea8d045e99a048b57a553f54b55b81ac8daa",
+        "percent": 2.000001238096e-05
+      },
+      {
+        "address": "0x8a510deaed2efb89ff844fef6a8939c4904f0738",
+        "percent": 2.000001238096e-05
+      },
+      {
+        "address": "0x87639d344c9befa9853e7869aaeb3079e0293dc1",
+        "percent": 2.000001238096e-05
+      }
+    ],
+    "top1_percent": 0.9780419105198269,
+    "top10_percent": 0.999585,
+    "is_mintable": false,
+    "is_proxy": false,
+    "can_take_back_ownership": false,
+    "hidden_owner": false,
+    "transfer_pausable": false,
+    "owner_address": null,
+    "pool_liquidity_usd": 1454.24325311
+  },
+  "not_verified": [],
+  "verdict": "CAUTION",
+  "reasons": [
+    "CAUTION: liquidity is thin ($2,909 < $10,000) \u2014 high slippage / exit risk."
+  ]
+}

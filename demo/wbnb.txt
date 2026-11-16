@@ -1,0 +1,17 @@
+====================================================================
+BSC TOKEN SAFETY REPORT — 0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c
+====================================================================
+Token        : Wrapped BNB (WBNB), decimals 18, supply 1568459.4045333397
+Owner        : None
+Sourcify     : exact_match (verified 2024-08-08T13:04:34Z)
+Pools        : exists=True  liquidity=$157,462,203.19  24h volume=$271,778,874.52
+  dexscreener   : 30 pair(s), liquidity $65,308,948.68, 24h vol $140,695,917.68
+  geckoterminal : 20 pair(s), liquidity $157,462,203.19, 24h vol $271,778,874.52
+GoPlus       : honeypot=False  buy tax=0.0  sell tax=0.0  holders=8889193  top1=13.34%  mintable=False  take-back-ownership=False
+Danger signals: none found
+--------------------------------------------------------------------
+VERDICT: GO
+  * Contract verified on Sourcify (exact_match).
+  * Pool liquidity $157,462,203 with $271,778,875 traded in 24h.
+  * GoPlus: not flagged as honeypot.
+====================================================================

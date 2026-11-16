@@ -1,0 +1,33 @@
+BSC Token-Safety Scout — endpoint test record
+Date: 2026-11-16 (UTC) / 2026-11-17 (WIB)
+
+LOCAL TEST (scout-server systemd service, port 8787):
+$ curl http://127.0.0.1:8787/health
+{
+  "status": "ok",
+  "service": "bsc-token-safety-scout"
+}
+Service status: active, enabled (systemctl).
+
+PUBLIC TEST: NOT PERFORMED — no public URL exists.
+The prescribed route (Cloudflare quick tunnel via cloudflared) could not
+be established from this VM:
+- This VM has no direct internet egress; all traffic must go through an
+  HTTP egress proxy (proxy env vars).
+- cloudflared ignores proxy env vars (verified: identical failure with a
+  deliberately bogus proxy address) and dials the DNS-resolved IP
+  directly (strace: connect to 198.18.122.65:443).
+- The direct connection is answered by the cell gateway with plain HTTP,
+  so tunnel creation fails with:
+  "failed to request quick Tunnel: Post
+   https://api.trycloudflare.com/tunnel: tls: first record does not
+   look like a TLS handshake"
+- Even via the proxy, CONNECT to the Cloudflare edge
+  (region1.v2.argotunnel.com:7844) fails, so a relay would not carry the
+  tunnel either.
+cloudflared binary: ~/workspace/bin/cloudflared (v2026.11.0).
+scout-tunnel systemd unit exists but is disabled (would crash-loop).
+
+Once a public URL exists (endpoint hosted somewhere with direct egress,
+or a tunnel started from such a host), record it in
+watchdog/current_url.txt — the watchdog cron then keeps it verified.

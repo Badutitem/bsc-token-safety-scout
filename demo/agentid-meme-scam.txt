@@ -1,0 +1,15 @@
+====================================================================
+BSC TOKEN SAFETY REPORT — 0xae545bfea9a1b3b8f749c6480bc83d8fe1017777
+====================================================================
+Token        : Agent ID (ai), decimals 18, supply 1000000000.0
+Owner        : 0x0000000000000000000000000000000000000000
+Sourcify     : unverified
+Pools        : exists=True  liquidity=$29,030.95  24h volume=$5,632.03
+  dexscreener   : 1 pair(s), liquidity $28,713.73, 24h vol $5,585.42
+  geckoterminal : 5 pair(s), liquidity $29,030.95, 24h vol $5,632.03
+GoPlus       : honeypot=False  buy tax=0.0  sell tax=0.0  holders=19905  top1=35.37%  mintable=False  take-back-ownership=False
+Danger signals: none found
+--------------------------------------------------------------------
+VERDICT: CAUTION
+  * CAUTION: contract source is NOT verified on Sourcify — code cannot be audited.
+====================================================================

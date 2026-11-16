@@ -1,0 +1,11 @@
+--- /health ---
+{
+  "status": "ok",
+  "service": "bsc-token-safety-scout"
+}
+--- POST /scan (AEQ) ---
+verdict: CAUTION
+sourcify: exact_match
+pool liquidity USD: 2908.73
+goplus honeypot: False
+--- server stopped after test (port 8787 closed) ---

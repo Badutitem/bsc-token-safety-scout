@@ -1,0 +1,16 @@
+====================================================================
+BSC TOKEN SAFETY REPORT — 0x7468aaa418869760b8488b45d59afb624781435b
+====================================================================
+Token        : Aequitas (AEQ), decimals 18, supply 209999870000.0
+Owner        : None
+Sourcify     : exact_match (verified 2026-11-08T01:06:42Z)
+Pools        : exists=True  liquidity=$2,908.73  24h volume=$0.90
+  dexscreener   : 1 pair(s), liquidity $2,908.73, 24h vol $0.90
+  geckoterminal : 1 pair(s), liquidity $2,907.25, 24h vol $0.90
+GoPlus       : honeypot=False  buy tax=0.02  sell tax=0.02  holders=104  top1=97.80%  mintable=False  take-back-ownership=False
+Danger signals:
+  [warn] mint function in source (verified source scan)
+--------------------------------------------------------------------
+VERDICT: CAUTION
+  * CAUTION: liquidity is thin ($2,909 < $10,000) — high slippage / exit risk.
+====================================================================

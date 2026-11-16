@@ -1,0 +1,107 @@
+{
+  "address": "0xae545bfea9a1b3b8f749c6480bc83d8fe1017777",
+  "chain": 56,
+  "chain_name": "BSC (BNB Smart Chain)",
+  "token": {
+    "name": "Agent ID",
+    "symbol": "ai",
+    "decimals": 18,
+    "total_supply": 1000000000.0,
+    "owner": "0x0000000000000000000000000000000000000000",
+    "is_contract": true
+  },
+  "verification": {
+    "source": "Sourcify",
+    "status": "unverified",
+    "verified_at": null
+  },
+  "pools": {
+    "exists": true,
+    "liquidity_usd": 29030.95,
+    "volume_24h_usd": 5632.03,
+    "dexscreener": {
+      "pairs_found": 1,
+      "total_liquidity_usd": 28713.73,
+      "total_volume_24h_usd": 5585.42,
+      "best_pair": {
+        "pair": "0x9C64D53F590e620F66Db56b14f3b591Abb6e918f",
+        "dex": "pancakeswap",
+        "liquidity_usd": 28713.73,
+        "volume_24h_usd": 5585.42
+      }
+    },
+    "geckoterminal": {
+      "pairs_found": 5,
+      "total_liquidity_usd": 29030.95,
+      "total_volume_24h_usd": 5632.03
+    }
+  },
+  "danger_signals": [],
+  "proxy": {
+    "eip1967_implementation": null,
+    "goplus_is_proxy": false
+  },
+  "goplus": {
+    "is_honeypot": false,
+    "honeypot_unknown": false,
+    "buy_tax": 0.0,
+    "sell_tax": 0.0,
+    "holder_count": "19905",
+    "top_holders": [
+      {
+        "address": "0xf2d2dfeac8e10dbd32e1df80d46cf945a421acc5",
+        "percent": 0.35374958408570856
+      },
+      {
+        "address": "0x9c64d53f590e620f66db56b14f3b591abb6e918f",
+        "percent": 0.11999122976990256
+      },
+      {
+        "address": "0xd42a05157af07f0c860a5211e03b4eaac20412ce",
+        "percent": 0.06328238620505729
+      },
+      {
+        "address": "0x28816c4c4792467390c90e5b426f198570e29307",
+        "percent": 0.01000006666666666
+      },
+      {
+        "address": "0xb4cbc832297e7cfa727f74fd07fca2bdc1a502bd",
+        "percent": 0.00910693079676096
+      },
+      {
+        "address": "0x7fc177ca823c3dcccd5abf94a3034381cf782de1",
+        "percent": 0.008769104328853685
+      },
+      {
+        "address": "0x0000a8b6741441bb4ba0dfe313a2bc7b2cf10000",
+        "percent": 0.008229129242707384
+      },
+      {
+        "address": "0x584a00374c2c5f2e1e3b21d5a45bedda20b42bd2",
+        "percent": 0.00809819466666666
+      },
+      {
+        "address": "0x5834d6d9d98382e094cc3dc8880fb88fc1a133e4",
+        "percent": 0.007698483332904654
+      },
+      {
+        "address": "0x476eaaa7187f4f3e6f493d6dfce95caacb45e7d6",
+        "percent": 0.007667989990166285
+      }
+    ],
+    "top1_percent": 0.35374958408570856,
+    "top10_percent": 0.596593,
+    "is_mintable": false,
+    "is_proxy": false,
+    "can_take_back_ownership": false,
+    "hidden_owner": false,
+    "transfer_pausable": false,
+    "owner_address": "0x0000000000000000000000000000000000000000",
+    "pool_liquidity_usd": 2.933166446606301
+  },
+  "not_verified": [],
+  "verdict": "CAUTION",
+  "reasons": [
+    "CAUTION: contract source is NOT verified on Sourcify \u2014 code cannot be audited."
+  ]
+}

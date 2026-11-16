@@ -1,0 +1,109 @@
+{
+  "address": "0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c",
+  "chain": 56,
+  "chain_name": "BSC (BNB Smart Chain)",
+  "token": {
+    "name": "Wrapped BNB",
+    "symbol": "WBNB",
+    "decimals": 18,
+    "total_supply": 1568510.8013409053,
+    "owner": null,
+    "is_contract": true
+  },
+  "verification": {
+    "source": "Sourcify",
+    "status": "exact_match",
+    "verified_at": "2024-08-08T13:04:34Z"
+  },
+  "pools": {
+    "exists": true,
+    "liquidity_usd": 157514674.53,
+    "volume_24h_usd": 271516670.54,
+    "dexscreener": {
+      "pairs_found": 30,
+      "total_liquidity_usd": 65314669.82,
+      "total_volume_24h_usd": 140715681.39,
+      "best_pair": {
+        "pair": "0x16b9a82891338f9bA80E2D6970FddA79D1eb0daE",
+        "dex": "pancakeswap",
+        "liquidity_usd": 34778254.86,
+        "volume_24h_usd": 2358669.45
+      }
+    },
+    "geckoterminal": {
+      "pairs_found": 20,
+      "total_liquidity_usd": 157514674.53,
+      "total_volume_24h_usd": 271516670.54
+    }
+  },
+  "danger_signals": [],
+  "proxy": {
+    "eip1967_implementation": null,
+    "goplus_is_proxy": false
+  },
+  "goplus": {
+    "is_honeypot": false,
+    "honeypot_unknown": false,
+    "buy_tax": 0.0,
+    "sell_tax": 0.0,
+    "holder_count": "8889193",
+    "top_holders": [
+      {
+        "address": "0x8f73b65b4caaf64fba2af91cc5d4a2a1318e5d8c",
+        "percent": 0.13340687091980966
+      },
+      {
+        "address": "0x9b00a09492a626678e5a3009982191586c444df9",
+        "percent": 0.07811587125394166
+      },
+      {
+        "address": "0x6bca74586218db34cdb402295796b79663d816e9",
+        "percent": 0.06017402728828574
+      },
+      {
+        "address": "0x59a661f1c909ca13ba3e9114bfdd81e5a420705d",
+        "percent": 0.019125767381000237
+      },
+      {
+        "address": "0x16b9a82891338f9ba80e2d6970fdda79d1eb0dae",
+        "percent": 0.01879177902935909
+      },
+      {
+        "address": "0x308000d0169ebe674b7640f0c415f44c6987d04d",
+        "percent": 0.014136919851830673
+      },
+      {
+        "address": "0x1cea83ec5e48d9157fcae27a19807bef79195ce1",
+        "percent": 0.012337771750513442
+      },
+      {
+        "address": "0xd7d069493685a581d27824fc46eda46b7efc0063",
+        "percent": 0.01159601730076487
+      },
+      {
+        "address": "0x28df0835942396b7a1b7ae1cd068728e6ddbbafd",
+        "percent": 0.011145612620854685
+      },
+      {
+        "address": "0x46df5652d20872234484f20dc9a62350c3452ffc",
+        "percent": 0.01102919252304347
+      }
+    ],
+    "top1_percent": 0.13340687091980966,
+    "top10_percent": 0.36986,
+    "is_mintable": false,
+    "is_proxy": false,
+    "can_take_back_ownership": false,
+    "hidden_owner": false,
+    "transfer_pausable": false,
+    "owner_address": null,
+    "pool_liquidity_usd": null
+  },
+  "not_verified": [],
+  "verdict": "GO",
+  "reasons": [
+    "Contract verified on Sourcify (exact_match).",
+    "Pool liquidity $157,514,675 with $271,516,671 traded in 24h.",
+    "GoPlus: not flagged as honeypot."
+  ]
+}

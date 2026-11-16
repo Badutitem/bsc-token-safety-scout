@@ -54,10 +54,29 @@ files (`scout.py`, `server.py`).
 
 ## How judges can try it
 
-- **HTTP endpoint:** `POST /scan` with `{"address": "0x..."}` returns
-  the full JSON report; `GET /health` for a liveness check.
-  (Endpoint URL to be added after deployment.)
-- **CLI:** `python3 scout.py <address>` or add `--json`.
+Clone the repo and run it — Python 3 standard library only, nothing to
+install, no API keys:
+
+```bash
+git clone https://github.com/Badutitem/bsc-token-safety-scout
+cd bsc-token-safety-scout
+python3 scout.py 0x7468aAA418869760b8488b45d59AfB624781435b        # text report
+python3 scout.py 0x7468aAA418869760b8488b45d59AfB624781435b --json # machine-readable
+```
+
+Or run it as an HTTP endpoint:
+
+```bash
+python3 server.py            # listens on $PORT, default 8787
+curl -X POST http://localhost:8787/scan \
+  -H 'Content-Type: application/json' \
+  -d '{"address": "0x7468aAA418869760b8488b45d59AfB624781435b"}'
+curl http://localhost:8787/health   # liveness check
+```
+
+This submission ships as a repo rather than a hosted service; a hosted
+endpoint can be stood up in minutes from the included `Dockerfile` on
+any host.
 
 Example addresses on BSC:
 

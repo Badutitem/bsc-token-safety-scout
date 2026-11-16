@@ -78,7 +78,8 @@ curl -X POST http://localhost:8787/scan \
 ```
 
 Deploy: any free Python host or a small VPS — it is two files
-(`scout.py`, `server.py`), stdlib only, nothing to install.
+(`scout.py`, `server.py`), stdlib only, nothing to install. A
+`Dockerfile` is included for container hosting.
 
 ## Real demo runs (16 Nov 2026, saved in `demo/`)
 
@@ -103,6 +104,7 @@ Full text + JSON outputs of all three runs, plus a live server test
 
 - `scout.py` — the agent (all checks, verdict logic, CLI).
 - `server.py` — HTTP endpoint (`/health`, `/scan`).
+- `Dockerfile` — container image for hosting the endpoint on any host.
 - `demo/` — real saved outputs of the demo runs and the server test.
 - `SUBMISSION_DRAFT.md` — the competition submission text.
 

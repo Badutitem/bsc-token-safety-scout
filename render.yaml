@@ -1,0 +1,9 @@
+services:
+  - type: web
+    name: bsc-token-safety-scout
+    env: python
+    plan: free
+    region: singapore
+    buildCommand: echo "stdlib only - nothing to build"
+    startCommand: python3 server.py
+    autoDeploy: true

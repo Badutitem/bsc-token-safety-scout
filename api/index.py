@@ -49,9 +49,20 @@ def _scan(start_response, address):
     return _respond(start_response, 200, report)
 
 
+def _clean_path(path):
+    # Serverless rewrites may deliver the function path itself
+    # ("/api/index.py/health"); strip it so routing matches the public URL.
+    for prefix in ("/api/index.py", "/api"):
+        if path == prefix:
+            return "/"
+        if path.startswith(prefix + "/"):
+            return path[len(prefix):]
+    return path
+
+
 def app(environ, start_response):
     method = environ.get("REQUEST_METHOD", "GET").upper()
-    path = environ.get("PATH_INFO", "/") or "/"
+    path = _clean_path(environ.get("PATH_INFO", "/") or "/")
 
     if path in ("/", "/health"):
         if method != "GET":

@@ -28,13 +28,27 @@ class Handler(BaseHTTPRequestHandler):
         self.end_headers()
         self.wfile.write(body)
 
+    @staticmethod
+    def _clean_path(raw):
+        # Serverless hosts (e.g. Vercel) may deliver the request with the
+        # function path still attached ("/api/index.py/health"); strip any
+        # such prefix so routing matches the public URL.
+        path = urlparse(raw).path
+        for prefix in ("/api/index.py", "/api"):
+            if path == prefix:
+                return "/"
+            if path.startswith(prefix + "/"):
+                return path[len(prefix):]
+        return path
+
     def do_GET(self):
         parsed = urlparse(self.path)
-        if parsed.path == "/health":
+        route = self._clean_path(self.path)
+        if route in ("/", "/health"):
             self._send_json(200, {"status": "ok",
                                   "service": "bsc-token-safety-scout"})
             return
-        if parsed.path == "/scan":
+        if route == "/scan":
             address = (parse_qs(parsed.query).get("address") or [None])[0]
             self._scan(address)
             return
@@ -44,8 +58,7 @@ class Handler(BaseHTTPRequestHandler):
                                          "GET /scan?address=0x..."]})
 
     def do_POST(self):
-        parsed = urlparse(self.path)
-        if parsed.path != "/scan":
+        if self._clean_path(self.path) != "/scan":
             self._send_json(404, {"error": "not found"})
             return
         try:

@@ -1,5 +1,29 @@
 # BSC Token-Safety Scout
 
+## Live demo — try it now
+
+**Endpoint: https://bsc-token-safety-scout.vercel.app**
+
+- Health: [`GET /health`](https://bsc-token-safety-scout.vercel.app/health)
+- Scan a token in your browser (WBNB):
+  [`GET /scan?address=0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c`](https://bsc-token-safety-scout.vercel.app/scan?address=0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c)
+  → verdict **GO** (verified source, ~$132M pool liquidity)
+- Or POST from a terminal:
+
+```bash
+curl -X POST https://bsc-token-safety-scout.vercel.app/scan \
+  -H 'Content-Type: application/json' \
+  -d '{"address": "0x7468aaa418869760b8488b45d59afb624781435b"}'
+```
+
+  → verdict **CAUTION** (real contract, but pool liquidity only ~$2.7K)
+
+Verified live on 2026-11-23: `/health` returns
+`{"status": "ok", "service": "bsc-token-safety-scout"}` and both scan
+examples above return full reports from the hosted deployment.
+
+---
+
 An autonomous screening agent for BNB Smart Chain (BSC, chain 56) tokens.
 Give it a token contract address and it returns a structured safety report
 with a **GO / CAUTION / BLOCK** verdict and the concrete evidence behind it.

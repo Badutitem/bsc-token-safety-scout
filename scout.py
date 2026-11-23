@@ -629,7 +629,7 @@ def scan(address):
     verdict, reasons, not_verified = build_verdict(
         sourcify, pools, onchain, danger, goplus)
 
-    return {
+    report = {
         "address": address,
         "chain": CHAIN_ID,
         "chain_name": "BSC (BNB Smart Chain)",
@@ -664,6 +664,43 @@ def scan(address):
         "verdict": verdict,
         "reasons": reasons,
     }
+    report["receipt"] = make_receipt(report)
+    return report
+
+
+# ---------------------------------------------------------------------------
+# Verifiable receipt
+# ---------------------------------------------------------------------------
+# Every report carries a Keccak-256 receipt over its own canonical form, so
+# anyone holding the report can prove it was not altered after the scan and
+# can re-derive the exact verdict inputs. Canonical form: the report WITHOUT
+# the "receipt" field, JSON with sorted keys and compact separators, UTF-8.
+# Verify with:  python3 scout.py --verify report.json
+
+def canonical_report_bytes(report):
+    core = {k: v for k, v in report.items() if k != "receipt"}
+    return json.dumps(core, sort_keys=True, separators=(",", ":"),
+                      ensure_ascii=False).encode("utf-8")
+
+
+def make_receipt(report):
+    digest = keccak256(canonical_report_bytes(report)).hex()
+    return {
+        "algorithm": "keccak-256",
+        "report_hash": "0x" + digest,
+        "canonicalization": ("report JSON without the 'receipt' field, "
+                             "sorted keys, compact separators, UTF-8"),
+        "verify_with": "python3 scout.py --verify <report.json>",
+    }
+
+
+def verify_receipt(report):
+    receipt = report.get("receipt") or {}
+    claimed = (receipt.get("report_hash") or "").lower()
+    if not claimed:
+        return False, "report has no receipt.report_hash"
+    actual = "0x" + keccak256(canonical_report_bytes(report)).hex()
+    return (actual == claimed), actual
 
 
 def render_text(r):
@@ -719,11 +756,35 @@ def render_text(r):
     lines.append(f"VERDICT: {r['verdict']}")
     for reason in r["reasons"]:
         lines.append(f"  * {reason}")
+    receipt = r.get("receipt") or {}
+    if receipt.get("report_hash"):
+        lines.append(f"Receipt (keccak-256): {receipt['report_hash']}")
+        lines.append("Verify: python3 scout.py --verify <report.json>")
     lines.append("=" * 68)
     return "\n".join(lines)
 
 
 def main(argv):
+    if "--verify" in argv:
+        files = [a for a in argv[1:]
+                 if not a.startswith("--") and a != "--verify"]
+        if len(files) != 1:
+            print("usage: python3 scout.py --verify <report.json>",
+                  file=sys.stderr)
+            return 2
+        try:
+            with open(files[0], encoding="utf-8") as fh:
+                saved = json.load(fh)
+        except Exception as exc:
+            print(f"error: cannot read report: {exc}", file=sys.stderr)
+            return 2
+        ok, detail = verify_receipt(saved)
+        if ok:
+            print(f"RECEIPT MATCH — report is unaltered "
+                  f"(hash {detail})")
+            return 0
+        print(f"RECEIPT MISMATCH — recomputed {detail}")
+        return 1
     args = [a for a in argv[1:] if not a.startswith("--")]
     as_json = "--json" in argv
     if len(args) != 1:

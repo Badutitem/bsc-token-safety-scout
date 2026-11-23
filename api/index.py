@@ -33,6 +33,7 @@ def _respond(start_response, code, obj):
     start_response(_STATUS[code], [
         ("Content-Type", "application/json"),
         ("Content-Length", str(len(body))),
+        ("Access-Control-Allow-Origin", "*"),
     ])
     return [body]
 

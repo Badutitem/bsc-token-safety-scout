@@ -81,6 +81,35 @@ Every report lists the evidence per check, and any check that could not
 be performed appears in a `not_verified` list. A check that failed is
 never treated as a pass.
 
+## Verifiable receipt
+
+Every report carries a `receipt` field: a **Keccak-256 hash of the
+report itself** (canonical form: the report JSON without the `receipt`
+field, sorted keys, compact separators, UTF-8 — computed with the same
+built-in pure-Python Keccak the selector scan uses).
+
+```json
+"receipt": {
+  "algorithm": "keccak-256",
+  "report_hash": "0x…",
+  "canonicalization": "report JSON without the 'receipt' field, sorted keys, compact separators, UTF-8",
+  "verify_with": "python3 scout.py --verify <report.json>"
+}
+```
+
+Anyone holding a report can prove it was not altered after the scan:
+
+```bash
+python3 scout.py --verify report.json
+# RECEIPT MATCH — report is unaltered (hash 0x…)
+# RECEIPT MISMATCH — recomputed 0x…        (exit code 1)
+```
+
+Honest scope: this is a content-integrity receipt, not an on-chain
+attestation. Anchoring these hashes via zkVerify proofs is the roadmap
+(see `SUBMISSION_DRAFT.md`); the receipt format is designed so the hash
+can be anchored without changing the report format.
+
 ## Run it
 
 CLI:
@@ -101,9 +130,11 @@ curl -X POST http://localhost:8787/scan \
 # or: curl "http://localhost:8787/scan?address=0x7468..."
 ```
 
-Deploy: any free Python host or a small VPS — it is two files
-(`scout.py`, `server.py`), stdlib only, nothing to install. A
-`Dockerfile` is included for container hosting.
+Deploy: the live demo above runs on Vercel (`api/index.py` +
+`vercel.json`, auto-deployed from this repo). Self-hosting works on any
+free Python host or a small VPS — it is two files (`scout.py`,
+`server.py`), stdlib only, nothing to install. A `Dockerfile` is
+included for container hosting.
 
 ## Real demo runs (16 Nov 2026, saved in `demo/`)
 
@@ -126,11 +157,26 @@ Full text + JSON outputs of all three runs, plus a live server test
 
 ## Files
 
-- `scout.py` — the agent (all checks, verdict logic, CLI).
-- `server.py` — HTTP endpoint (`/health`, `/scan`).
+- `scout.py` — the agent (all checks, verdict logic, receipt, CLI).
+- `server.py` — HTTP endpoint (`/health`, `/scan`), CORS-enabled.
+- `api/index.py` + `vercel.json` — serverless deployment of the same
+  endpoint (the live demo above).
 - `Dockerfile` — container image for hosting the endpoint on any host.
 - `demo/` — real saved outputs of the demo runs and the server test.
 - `SUBMISSION_DRAFT.md` — the competition submission text.
+- `SHARE.md` — launch post / thread draft.
+
+## How this maps to the Wildcard judging criteria
+
+- **Useful problem** — token screening is a real, repeated loss point
+  for BSC hunters and traders; this automates the manual checklist.
+- **Working implementation, visible in action** — live endpoint above;
+  judges can scan any BSC token from a browser, no install needed.
+- **Clear explanation** — this README, per-check evidence in every
+  report, and full saved demo runs in `demo/`.
+- **Verifiability (optional plus)** — every report is bound to a
+  Keccak-256 receipt that anyone can recompute (`--verify`); on-chain
+  zkVerify anchoring of the same hash is the stated roadmap.
 
 ## Limits
 
@@ -139,3 +185,5 @@ Full text + JSON outputs of all three runs, plus a live server test
 - Selector/source scans find *known* danger patterns; a clean scan is
   evidence, not a proof of safety. The verdict is a screening aid, not
   financial advice.
+- The receipt proves a report was not altered after it was issued; it
+  does not by itself prove the scan ran on-chain or when it ran.

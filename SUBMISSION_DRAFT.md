@@ -54,8 +54,19 @@ files (`scout.py`, `server.py`).
 
 ## How judges can try it
 
-Clone the repo and run it — Python 3 standard library only, nothing to
-install, no API keys:
+**Fastest — the hosted endpoint (no install):**
+
+- Health: https://bsc-token-safety-scout.vercel.app/health
+- Scan WBNB in a browser:
+  https://bsc-token-safety-scout.vercel.app/scan?address=0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c
+- POST any BSC address:
+  `curl -X POST https://bsc-token-safety-scout.vercel.app/scan -H 'Content-Type: application/json' -d '{"address": "0x..."}'`
+
+Every report includes a Keccak-256 `receipt` over its own contents;
+verify any saved report with `python3 scout.py --verify report.json`.
+
+Or clone the repo and run it — Python 3 standard library only, nothing
+to install, no API keys:
 
 ```bash
 git clone https://github.com/Badutitem/bsc-token-safety-scout
@@ -74,10 +85,6 @@ curl -X POST http://localhost:8787/scan \
 curl http://localhost:8787/health   # liveness check
 ```
 
-This submission ships as a repo rather than a hosted service; a hosted
-endpoint can be stood up in minutes from the included `Dockerfile` on
-any host.
-
 Example addresses on BSC:
 
 - `0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c` (WBNB) → **GO** —
@@ -93,8 +100,10 @@ Full saved outputs of these runs are in the repo's `demo/` folder.
 ## Why Wildcard
 
 The scout is a working, useful agent today — not a mock-up: every demo
-output in the repo is a real run against live chain data. zkVerify
-integration is optional in this track; the roadmap is to anchor each
-scan report (address + verdict + evidence hash) as a verifiable proof,
-so a screening result can be shown to a third party without trusting
-the scout's operator.
+output in the repo is a real run against live chain data, and the agent
+is hosted live at the endpoint above. Each report already carries a
+Keccak-256 receipt over its full contents, so a screening result can be
+shown to a third party and checked for tampering without trusting the
+scout's operator. zkVerify integration is optional in this track; the
+roadmap is to anchor that same report hash as an on-chain zkVerify
+proof.
